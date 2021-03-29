@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Exercício 12</title>
+</head>
+<style>
+    input[type=text], select {
+        display: block;
+    }
+
+    h1 {
+        font-size: 16px;
+        margin-bottom: 0px;
+        margin-bottom: 6px;
+    }
+
+    span {
+        font-size: 13px;
+        font-family: Arial, Helvetica, sans-serif;
+        color: darkblue;
+    }
+
+    p {
+        margin: 0px;
+    }
+
+    body {
+        width: 40%;
+        display: block;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    .questao {
+        background-color: #e0f7faa1;
+        padding: 1px 0px 10px 10px;
+        margin-bottom: 10px;
+        border-radius: 4px;
+
+    }
+
+    .questao:hover {
+        background-color: #e0f7fa;
+    }
+
+    input[type=button] {
+        margin-top: 10px;
+    }
+</style>
+
+<body>
+    <div id="corpo">
+        <div class="questao">
+            <h1>Questão 01:<span>Mostrar os números entre 2 valores
+                    <a href="detalhesExe12.html"
+                        target="_blank">detalhar</a></span></h1>
+            <p id="questao1">Resultado: Os número entre A e Z são (x,x,x,x,x).</p>
+            <label for="">Valor 01:</label>
+            <input type="text" id="01">
+            <label for="">Valor 02:</label>
+            <input type="text" id="02">
+            <input type="button" value="Executar" onclick="intervalo()">
+        </div>
+        <div class="questao">
+            <h1>Questã 02:<span> Lista armazenada <a
+                        href="detalhesExe12.html"
+                        target="_blank">detalhar</a></span></h1>
+            <p id="questao2">Resultado: A lista de itens é [xxxx,xxxx,xxxx,xxxxx]</p>
+            <label for="item">Item:</label>
+            <input type="text" id="item">
+            <input type="button" value="Add" onclick="adicionaritem()">
+            <input type="button" value="Show" onclick="mostrarlista()">
+            <input type="button" value="Clear" onclick="apagaritem()">
+        </div>
+        <div class="questao">
+            <h1>Questão 03: <span> Lista de homens e mulheres - <a
+                        href="detalhesExe12.html"
+                        target="_blank">detalhar</a></span></h1>
+            <p id="questao3">Resultado:
+                <br>Lista de homens: 
+                <br>Lista de mulheres:
+            </p>
+            <br>
+            <label for="nome">Nome:</label>
+            <input type="text" name="nome" id="nome">
+            <label for="">Sexo:</label>
+            <select genero ="sexo" id="genero">
+                <option value="Masculino">Masculino</option>
+                <option value="Feminino">Feminino</option>
+            </select>
+            <input type="button" value="Add" onclick="adicionarnome()">
+            <input type="button" value="Show" onclick="mostrarnome()">
+            <input type="button" value="Clear" onclick="apagarnome()">
+            </div>
+
+        </div>
+
+    </div>
+<script>
+
+function intervalo(){
+var numeroescolhido = [];
+var valor1 = Number(document.getElementById("01").value);
+var valor2 = Number(document.getElementById("02").value);
+var resultado, min, max;
+var txt = ""
+if(!Number.isInteger(valor1) || !Number.isInteger(valor2) || valor1 == valor2){
+
+document.getElementById("questao1").innerHTML = "<span>Os valores devem ser inteiros e diferentes entre si</span>";
+
+}
+
+else{
+
+if(valor1 < valor2){
+
+    min = valor1;
+    max = valor2;
+
+}
+
+else{
+
+    min = valor2;
+    max = valor1;
+
+}
+
+resultado = min;
+resultado++;
+
+while(resultado < max){
+
+    numeroescolhido.push(resultado);
+    resultado++;
+
+}
+txt +=""
+txt += numeroescolhido.toString();
+
+
+document.getElementById("questao1").innerHTML = "Os valores entre " + min + " e " + max + " são " + txt;
+
+}
+
+
+
+}
+var itemescolhido = [];
+function adicionaritem(){
+
+var item = document.getElementById("item").value;
+
+if(!itemescolhido.includes(item)){
+
+    itemescolhido.push(item);
+
+}
+
+}
+function mostrarlista(){
+var txt = "";
+txt += itemescolhido.toString();
+txt += "";
+document.getElementById("questao2").innerHTML = "A lista de itens é: " + txt;
+
+}
+
+function apagaritem(){
+
+var item = document.getElementById("item").value;
+
+if(itemescolhido.includes(item)){
+    
+    var procuraritem = itemescolhido.indexOf(item);
+    itemescolhido.splice(procuraritem);
+
+}
+
+else{
+
+    document.getElementById("questao2").innerHTML = "O item " + item + " não existe na lista!";
+
+}
+
+}
+var nomemulher = [];
+var nomehomem = [];
+function adicionarnome(){
+
+var nome = document.getElementById("nome").value;
+var genero = document.getElementById("genero").value;
+
+if(genero == "Masculino"){
+
+    if(!nomehomem.includes(nome)){
+
+        nomehomem.push(nome);
+
+    }
+
+}
+
+else{
+
+    if(!nomemulher.includes(nome)){
+
+        nomemulher.push(nome);
+
+    }
+
+}
+
+}
+
+function mostrarnome(){
+
+var lista1 = "";
+var lista2 = "";
+
+lista1 += nomehomem.toString();
+lista1 += "";
+
+lista2 += nomemulher.toString();
+lista2 += "";
+
+document.getElementById("questao3").innerHTML = "Lista de homens: " + lista1 + "<br> Lista de mulheres: " + lista2;
+
+}
+
+function apagarnome(){
+
+var nome = document.getElementById("nome").value;
+var genero = document.getElementById("genero").value;
+
+if(genero == "Masculino"){
+
+    if(nomehomem.includes(nome)){
+
+        var nomeescolhido = nomehomem.indexOf(nome);
+        nomehomem.splice(nomeescolhido);
+
+    }
+
+    else{
+
+        document.getElementById("questao3").innerHTML = "O nome " + name + "não existe nas listas";
+
+    }
+
+}
+
+else{
+
+    if(nomemulher.includes(nome)){
+
+        var nomeescolhido = nomemulher.indexOf(nome);
+        nomemulher.splice(nomeescolhido);
+
+    }
+
+    else{
+
+            document.getElementById("questao3").innerHTML = "O nome " + name + "não existe nas listas";
+
+    }
+
+}
+
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</script>
+
+
+
+
+
+
+
+
+
+</body>
+
+</html>
